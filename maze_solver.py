@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from fringe import Fringe
 from state import State
-
+from greedy import greedy_solver
 
 def solve_maze_general(maze, algorithm):
     """
@@ -11,11 +11,15 @@ def solve_maze_general(maze, algorithm):
     :return: True if solution is found, False otherwise
     """
     # select the right fringe for each algorithm
+    fr = Fringe()
     if algorithm == "BFS":
         fr = Fringe("FIFO")
     elif algorithm == "DFS":
         fr = Fringe("STACK")
-        #Implement if for the other types of search
+    elif algorithm == "GREEDY":
+        greedy_solver(maze)
+        return
+        
     else:
         print("Algorithm not found/implemented, exit")
         return
@@ -33,7 +37,7 @@ def solve_maze_general(maze, algorithm):
 
         if room.is_goal():
             # if room is the goal, print that with the statistics and the path and return
-            print("solved")
+            print("solved why is this here")
             fr.print_stats()
             state.print_path()
             state.print_actions()
