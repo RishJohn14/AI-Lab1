@@ -24,6 +24,7 @@ def solve_maze_general(maze, algorithm):
     room = maze.get_room(*maze.get_start())
     state = State(room, None)
     fr.push(state)
+    visited = [room]
 
     while not fr.is_empty():
 
@@ -45,8 +46,10 @@ def solve_maze_general(maze, algorithm):
             # loop through every possible move
             # d is the directions, Can i implement a visited list here to avoid going back?
             new_room, cost = room.make_move(d, state.get_cost())    # Get new room after move and cost to get there
-            new_state = State(new_room, state, cost)                # Create new state with new room and old room
-            fr.push(new_state)                                      # push the new state
+            if new_room not in visited:
+                visited.append(new_room)
+                new_state = State(new_room, state, cost)                # Create new state with new room and old room
+                fr.push(new_state)                                      # push the new state
 
     print("not solved")     # fringe is empty and goal is not found, so maze is not solved
     fr.print_stats()        # print the statistics of the fringe
