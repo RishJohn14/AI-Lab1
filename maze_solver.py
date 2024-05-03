@@ -3,6 +3,8 @@ from fringe import Fringe
 from state import State
 from greedy import greedy_solver
 from AStar import AStar_solver
+from UCS import ucs_solver
+
 
 def solve_maze_general(maze, algorithm):
     """
@@ -23,7 +25,10 @@ def solve_maze_general(maze, algorithm):
     elif algorithm == "ASTAR":
         AStar_solver(maze)
         return
-        
+    elif algorithm == "UCS":
+        ucs_solver(maze)
+        return
+
     else:
         print("Algorithm not found/implemented, exit")
         return
